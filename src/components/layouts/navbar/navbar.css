@@ -1,0 +1,8 @@
+/* src/components/layouts/navbar/navbar.css */
+.navbar {
+    padding: 1rem;
+}
+
+.nav-link {
+    margin-right: 1rem;
+}
