@@ -1,4 +1,4 @@
-// src/components/pages/itemListContainer/ItemListContainer.jsx
+
 import React from 'react';
 import './itemListContainer.css';
 

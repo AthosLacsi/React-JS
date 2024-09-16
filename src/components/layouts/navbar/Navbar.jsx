@@ -1,7 +1,7 @@
-// src/components/layouts/navbar/NavBar.jsx
+
 import React from 'react';
 import './navbar.css';
-import CartWidget from '../../common/cartWidget/CartWidget'; // Ruta corregida
+import CartWidget from '../../common/cartWidget/CartWidget'; 
 
 const NavBar = () => {
     return (
