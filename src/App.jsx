@@ -1,15 +1,22 @@
-// src/App.jsx
-import React from 'react';
-import NavBar from './components/layouts/navbar/Navbar';
-import ItemListContainer from './components/pages/itemListContainer/itemListContainer';
 
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import NavBar from './components/layouts/navbar/Navbar';
+import ItemListContainer from './components/pages/ItemListContainer/ItemListContainer';
+import ItemDetailContainer from './components/pages/itemDetailContainer/ItemDetailContainer';
+import CartWidget from './components/common/cartWidget/CartWidget';
 
 function App() {
   return (
-    <div>
+    <Router>
       <NavBar />
-      <ItemListContainer greeting="¡Bienvenidos a Puchigurumis!" />
-    </div>
+      <Routes>
+        <Route path="/" element={<ItemListContainer greeting="¡Bienvenidos a A Fondo Motores!" />} />
+        <Route path="/category/:categoryId" element={<ItemListContainer />} />
+        <Route path="/item/:itemId" element={<ItemDetailContainer />} />
+        <Route path="/cart" element={<CartWidget />} />
+      </Routes>
+    </Router>
   );
 }
 
