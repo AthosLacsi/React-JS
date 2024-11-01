@@ -1,16 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom'; // Asegúrate de importar Link
-import { getProducts } from '../../../async-mocks';
-import './itemListContainer.css';
+import { useParams, Link } from 'react-router-dom';
+import { db } from "../../configFirebase"; // Importa la configuración de Firebase
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import './itemlistcontainer.css';
 
 const ItemListContainer = ({ greeting }) => {
     const { categoryId } = useParams();
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        getProducts(categoryId).then(data => {
-            setProducts(data);
-        });
+        const fetchProducts = async () => {
+            const productsCollection = collection(db, 'products');
+            const q = categoryId 
+                ? query(productsCollection, where('category', '==', categoryId)) 
+                : productsCollection;
+            const querySnapshot = await getDocs(q);
+            const productsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            setProducts(productsData);
+        };
+        fetchProducts();
     }, [categoryId]);
 
     return (
@@ -30,3 +38,4 @@ const ItemListContainer = ({ greeting }) => {
 };
 
 export default ItemListContainer;
+
