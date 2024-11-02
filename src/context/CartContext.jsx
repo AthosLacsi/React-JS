@@ -5,30 +5,47 @@ export const CartContext = createContext();
 export const useCart = () => useContext(CartContext);
 
 const CartProvider = ({ children }) => {
-    const [cartItems, setCartItems] = useState([]);
+    const [cart, setCart] = useState([]);
 
-    const addToCart = (product, quantity) => {
-        const itemIndex = cartItems.findIndex(item => item.id === product.id);
-        if (itemIndex === -1) {
-            setCartItems([...cartItems, { ...product, quantity }]);
-        } else {
-            const newCart = [...cartItems];
-            newCart[itemIndex].quantity += quantity;
-            setCartItems(newCart);
-        }
+    const addToCart = (product) => {
+        setCart((prevCart) => {
+            const existingProduct = prevCart.find(item => item.id === product.id);
+            if (existingProduct) {
+                return prevCart.map(item =>
+                    item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+                );
+            }
+            return [...prevCart, { ...product, quantity: 1 }];
+        });
     };
 
-    const removeFromCart = (productId) => {
-        setCartItems(cartItems.filter(item => item.id !== productId));
+    const removeFromCart = (id) => {
+        setCart((prevCart) => prevCart.filter(item => item.id !== id));
     };
 
-    const clearCart = () => setCartItems([]);
+    const updateQuantity = (id, amount) => {
+        setCart((prevCart) =>
+            prevCart.map(item =>
+                item.id === id ? { ...item, quantity: Math.max(1, item.quantity + amount) } : item
+            )
+        );
+    };
+
+    const clearCart = () => {
+        setCart([]);
+    };
+
+    const totalAmount = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
     return (
-        <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, clearCart }}>
+        <CartContext.Provider value={{ cart, addToCart, removeFromCart, updateQuantity, clearCart, totalAmount }}>
             {children}
         </CartContext.Provider>
     );
 };
 
 export default CartProvider;
+
+
+
+

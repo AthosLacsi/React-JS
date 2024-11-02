@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { db } from "../../configFirebase"; // Importa la configuración de Firebase
+import { db } from '../../../configFirebase';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import './itemlistcontainer.css';
 
@@ -38,4 +38,6 @@ const ItemListContainer = ({ greeting }) => {
 };
 
 export default ItemListContainer;
+
+
 
