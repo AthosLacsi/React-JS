@@ -5,7 +5,7 @@ import ItemDetailContainer from './components/pages/itemdetailcontainer/ItemDeta
 import ItemListContainer from './components/pages/itemlistcontainer/ItemListContainer';
 import Cart from './components/pages/cart/Cart'; // Importar Cart
 import Checkout from './components/pages/checkout/Checkout'; // Importar Checkout
-import CartWidget from './components/common/cartWidget/CartWidget';
+// import CartWidget from './components/common/cartWidget/CartWidget';
 import CartProvider from './context/CartContext';
 
 

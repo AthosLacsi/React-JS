@@ -23,8 +23,8 @@ const Cart = () => {
                     <p>Precio: ${item.price}</p>
                     <p>Cantidad: {item.quantity}</p>
                     <p>Total: ${item.price * item.quantity}</p>
-                    <button onClick={() => updateQuantity(item.id, -1)}>-</button>
-                    <button onClick={() => updateQuantity(item.id, 1)}>+</button>
+                    <button onClick={() => updateQuantity(item.id, -1)}disabled={item.quantity <= 1}>-</button>
+                    <button onClick={() => updateQuantity(item.id, 1)}disabled={item.quantity >= item.stock}>+</button>
                     <button onClick={() => removeFromCart(item.id)}>Eliminar</button>
                 </div>
             ))}
